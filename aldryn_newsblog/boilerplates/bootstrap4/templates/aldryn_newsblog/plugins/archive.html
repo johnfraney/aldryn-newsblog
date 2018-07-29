@@ -1,0 +1,24 @@
+{% load i18n apphooks_config_tags %}
+
+{% regroup dates by date.year as years %}
+{% with current_year=year current_month=month %}
+
+<div class="aldryn aldryn-newsblog aldryn-newsblog-archive">
+    <div class="list-group">
+        {% for year in years %}
+            <a class="list-group-item bg-light" href="{% namespace_url 'article-list-by-year' year=year.grouper namespace=instance.app_config.namespace default='' %}" class="panel-title">{{ year.grouper }}</a>
+            {# month list #}
+            {# NOTE: Wrapping the following anchor markup will break tests #}
+            {% for month in year.list %}
+            <a href="{% namespace_url 'article-list-by-month' year=year.grouper month=month.date|date:"n" namespace=instance.app_config.namespace default='' %}" class="list-group-item d-flex justify-content between align-items-center{% if year.grouper == current_year and month.date.month == current_month %} active{% endif %}">
+              <div>{{ month.date|date:"F" }}</div>
+              <div class="badge badge-secondary badge-pill ml-auto">{{ month.num_articles }}</div>
+            </a>
+            {% endfor %}
+        {% empty %}
+            <div class="list-group-item disabled">{% trans "No items available" %}</div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endwith %}

@@ -1,0 +1,13 @@
+{% load i18n apphooks_config_tags %}
+
+<div class="aldryn aldryn-newsblog aldryn-newsblog-tags">
+    <a class="badge badge-secondary{% if not newsblog_tag %} active{% endif %}" href="{% namespace_url "article-list" namespace=instance.app_config.namespace default='' %}">
+        {% trans "All" %}
+    </a>
+    {% for tag in tags %}
+    <a class="badge badge-secondary{% if newsblog_tag.id == tag.id %} active{% endif %}" href="{% namespace_url "article-list-by-tag" tag.slug namespace=instance.app_config.namespace default='' %}">
+        {{ tag.name }}
+        &times; {{ tag.article_count }}
+    </a>
+    {% endfor %}
+</div>

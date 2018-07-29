@@ -1,0 +1,27 @@
+{% load i18n staticfiles thumbnail apphooks_config_tags %}
+
+<div class="aldryn-newsblog-meta d-flex justify-content between align-items-center">
+    {% if author and author.slug %}
+        <div class="image">
+            <a href="{% namespace_url "article-list-by-author" author.slug namespace=namespace default='' %}">
+                {% if author.visual %}
+                    {% thumbnail author.visual "50x50" crop upscale subject_location=author.visual.subject_location as author_image %}
+                    <img class="rounded-circle" src="{{ author_image.url }}" width="50" height="50" alt="{{ author }}">
+                {% else %}
+                    <img class="rounded-circle" src="{% static "img/aldryn_newsblog/no-photo.png" %}" height="50" width="50" alt="{{ author }}">
+                {% endif %}
+            </a>
+        </div>
+        <div class="meta mx-2">
+            <div class="author"><a href="{% namespace_url "article-list-by-author" author.slug namespace=namespace default='' %}">{{ author.name }}</a></div>
+            {% if author_view and author.slug %}
+                <div class="job text-muted">{{ author.function }}</div>
+            {% else %}
+                <div class="date text-muted">{{ article.publishing_date|date }}</div>
+            {% endif %}
+        </div>
+        <div class="ml-auto">
+            <span class="badge badge-secondary badge-pill">{{ author.article_count }}</span>
+        </div>
+    {% endif %}
+</div>

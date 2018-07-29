@@ -1,0 +1,23 @@
+.aldryn-newsblog-article-search .results-list .unpublished,
+.aldryn-newsblog-article.unpublished {
+    background: #f9fcee url('../../img/aldryn_newsblog/unpublished.png') repeat; /* hsl(44, 70%, 97%) */
+}
+
+.aldryn-newsblog-article-search .results-list .future,
+.aldryn-newsblog-article.future {
+    background: #eefcfc url('../../img/aldryn_newsblog/future.png') repeat; /* hsl(181, 70%, 96%) */
+}
+
+.aldryn-newsblog-article {
+  border-bottom: 1px solid #f4f4f5;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* .list-group-item { */
+/*   padding: .5rem 1rem; */
+/* } */
+
+.badge.active {
+  background: black;
+}
